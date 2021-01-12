@@ -2,17 +2,27 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-class HelloWorld extends React.Component {
+class Main extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: [],
+    }
+  }
+
   render() {
     return (
       <div>
-        I can show you the world {this.props.name}
+        <button onClick={() => this.setState({ count: this.state.count.concat(<button> new </button>) })}> Add company </button>
+           {this.state.count}
       </div>
     );
   }
+
 }
 
 ReactDOM.render(
-  <HelloWorld name = "Vineeth" />,
+  <Main />,
   document.getElementById('root')
 );
