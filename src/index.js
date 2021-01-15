@@ -1,28 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { Button } from '@material-ui/core';
+import Company from './Company';
+import Modal from 'react-modal';
 
-class Main extends React.Component {
+function Main() {
+  const [companies, setCompanies] = useState([]);
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      count: [],
-    }
+  function handleAddButton() {
+    setCompanies(companies.concat(<Button variant="contained" color="primary"
+      onClick={() => setModalIsOpen(true)}>New Company</Button>));
   }
 
-  render() {
-    return (
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  return (
+    <div className="Main">
+      <Button variant="contained" color="secondary"
+        onClick={handleAddButton}>Add Company</Button>
+
+      <Modal isOpen={modalIsOpen}>
+        <h2> New Company </h2>
+        <p> Application Info </p>
+        <div>
+          <button onClick={() => setModalIsOpen(false)}> Close </button>
+        </div>
+      </Modal>
+
       <div>
-        <button onClick={() => this.setState({ count: this.state.count.concat(<button> new </button>) })}> Add company </button>
-           {this.state.count}
+        {companies}
       </div>
-    );
-  }
 
+    </div>
+  )
 }
 
 ReactDOM.render(
   <Main />,
   document.getElementById('root')
 );
+
+export default Main;
